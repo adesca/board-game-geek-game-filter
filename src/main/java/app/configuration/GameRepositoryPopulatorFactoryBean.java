@@ -1,6 +1,7 @@
 package app.configuration;
 
 import app.entities.Game;
+import app.entities.Mechanic;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.springframework.core.io.Resource;
@@ -30,7 +31,10 @@ class GameResourceReader implements ResourceReader {
         return csvParser.getRecords().stream()
                 .map(record ->
                 {
-                    List<String> mechanics = asList(record.get(CSVColumn.mechanic).split(", "));
+                    List<Mechanic> mechanics = asList(record.get(CSVColumn.mechanic).split(", "))
+                            .stream()
+                            .map(mechanic -> new Mechanic(mechanic))
+                            .collect(Collectors.toList());
 
                     return Game.builder()
                             .rank(Long.parseLong(record.get(CSVColumn.rank)))

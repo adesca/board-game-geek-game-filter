@@ -11,6 +11,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
@@ -33,8 +34,16 @@ public class DataPopulatorConfigurationTest {
         assertThat(actualGame).isEqualToIgnoringGivenFields(expectedGame,
                 "id", "mechanics");
 
-        assertThat(actualGame.getMechanics()).hasSameElementsAs(expectedGame.getMechanics());
+        assertEquals(actualGame.getMechanics().size(), expectedGame.getMechanics().size());
 
+        boolean isEveryMechanicInTheOtherList = expectedGame.getMechanics().stream()
+                .allMatch(mechanic -> {
+                    return actualGame.getMechanics().stream().anyMatch(mechanic1 -> {
+                        return mechanic.equals(mechanic1);
+                    });
+                });
+
+        assertTrue(isEveryMechanicInTheOtherList);
 
     }
 }

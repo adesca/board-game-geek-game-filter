@@ -23,11 +23,13 @@ public class Game {
     String bggUrl;
     String name;
 
-    @ElementCollection
-    @CollectionTable(
-            name="mechanics"
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "GAME_MECHANICS_JOIN_TABLE",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "mechanics_id")
     )
-    List<String> mechanics;
+    List<Mechanic> mechanics;
 
 
 }
