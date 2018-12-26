@@ -7,7 +7,7 @@
             }
         })
         .then(function (mechanics) {
-            var containerDiv = document.getElementById('container');
+            var containerDiv = document.getElementById('mechanics-container');
 
             mechanics.map(function (mechanic) {
                 var newInput = document.createElement('input');

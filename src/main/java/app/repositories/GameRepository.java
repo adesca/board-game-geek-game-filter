@@ -1,5 +1,6 @@
 package app.repositories;
 
+import app.entities.FullGameProjection;
 import app.entities.Game;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -13,10 +14,15 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @Repository
-//@RepositoryRestResource(exported = false)
+@RepositoryRestResource()
 public interface GameRepository extends CrudRepository<Game, Long> {
 
     Game findGameByNameLikeIgnoreCase(String name);
 
-    List<Game> findDistinctByMechanicsValue(String mechanic);
+    @RestResource(path = "findGamesWithMechanics")
+    List<Game> findDistinctByMechanicsValueIn(@Param("mechanics") Iterable<String> mechanic);
+
+    @RestResource(path = "findGamesByMechanic")
+    List<Game> findByMechanicsValue(@Param("mechanic") String mechanic);
+
 }
