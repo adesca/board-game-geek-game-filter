@@ -40,6 +40,7 @@ class GameResourceReader implements ResourceReader {
                             .rank(Long.parseLong(record.get(CSVColumn.rank)))
                             .bggUrl(record.get(CSVColumn.bgg_url))
                             .name(record.get(CSVColumn.names))
+                            .categories(record.get(CSVColumn.category))
                             .mechanics(mechanics)
                             .build();
                 })

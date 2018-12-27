@@ -34,6 +34,6 @@ var updateGameView = function () {
             .textContent;
     })
 
-    updateGames(selectedMechanics);
+    updateGamesView(selectedMechanics);
 
 };

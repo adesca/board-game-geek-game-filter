@@ -1,4 +1,4 @@
-var updateGames = function (mechanicsArray) {
+var updateGamesView = function (mechanicsArray) {
     console.log('bleh');
 
     var url;
@@ -27,21 +27,29 @@ var updateGames = function (mechanicsArray) {
         .then(function (value) {
             var containerDiv = document.getElementById('fetched-games-container');
 
-            while(containerDiv.firstChild) {
+            console.log('val ', value._embedded.games);
+            // debugger;
+            while (containerDiv.firstChild) {
                 containerDiv.removeChild(containerDiv.firstChild);
             }
 
             value._embedded.games.forEach(function (game) {
-                var newGame = document.createElement('div');
-                var textNode = document.createTextNode(game.name);
-                newGame.appendChild(textNode);
-
-                console.log('here');
-                containerDiv.appendChild(newGame);
+                console.log('here', game);
+                createGameElement(game).then(newGameEl => {
+                    containerDiv.appendChild(newGameEl);
+                })
             })
         })
 }
 
-function getData(url, data) {
+createGameElement = async function (game) {
+    const newGameHtmlString = await interpolateRemoteTemplate('game-accordion-item.html', {game: game});
 
+    return htmlToElement(newGameHtmlString);
+};
+
+createMechanicEls = function (mechanicsArr) {
+    return mechanicsArr.map(mechanic => {
+        return mechanic.value;
+    }).join(' ');
 }

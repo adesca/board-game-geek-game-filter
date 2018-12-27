@@ -1,0 +1,17 @@
+<li>
+    <a class="uk-accordion-title" href="#">
+        ${this.game.name}
+    </a>
+    <div class="uk-accordion-content">
+        <ul class="uk-list uk-list-striped">
+            <li>
+                Url: ${this.game.bggUrl}
+            </li>
+            <li>
+                Mechanics: ${createMechanicEls(this.game.mechanics)}
+            </li>
+            Categories: ${this.game.categories}
+
+        </ul>
+    </div>
+</li>

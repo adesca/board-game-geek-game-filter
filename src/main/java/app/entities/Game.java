@@ -22,6 +22,7 @@ public class Game {
     Long rank;
     String bggUrl;
     String name;
+    String categories;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(

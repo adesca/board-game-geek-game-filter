@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @Repository
-@RepositoryRestResource()
+@RepositoryRestResource(excerptProjection = FullGameProjection.class)
 public interface GameRepository extends CrudRepository<Game, Long> {
 
     Game findGameByNameLikeIgnoreCase(String name);

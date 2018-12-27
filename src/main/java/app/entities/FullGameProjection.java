@@ -13,6 +13,7 @@ public interface FullGameProjection {
     String getName();
     Long getRank();
     String getBggUrl();
+    String getCategories();
 
     List<Mechanic> getMechanics();
 }

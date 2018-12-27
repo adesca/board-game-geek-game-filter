@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/js/uikit-icons.min.js"></script>
+
+    <script  src="ElementUtils.js"></script>
     <script  src="mechanicsViewLogic.js"></script>
     <script  src="gameViewLogic.js"></script>
 </head>
@@ -11,9 +19,9 @@
 
     </div>
 
-    <div id="fetched-games-container">
+    <ul uk-accordion id="fetched-games-container" class="uk-list-divider">
 
-    </div>
+    </ul>
 
 <button onclick="updateGameView()">Update game view</button>
 </body>
