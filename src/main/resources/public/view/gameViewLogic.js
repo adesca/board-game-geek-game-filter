@@ -1,3 +1,5 @@
+let currentGamesInView = {};
+
 var updateGamesView = function (mechanicsArray) {
     console.log('bleh');
 
@@ -25,21 +27,25 @@ var updateGamesView = function (mechanicsArray) {
         }
     })
         .then(function (value) {
-            var containerDiv = document.getElementById('fetched-games-container');
-
-            console.log('val ', value._embedded.games);
-            // debugger;
-            while (containerDiv.firstChild) {
-                containerDiv.removeChild(containerDiv.firstChild);
-            }
+            clearExistingGamesFromView();
+            const containerDiv = document.getElementById('fetched-games-container');
 
             value._embedded.games.forEach(function (game) {
-                console.log('here', game);
+                currentGamesInView[game.name] = game;
                 createGameElement(game).then(newGameEl => {
                     containerDiv.appendChild(newGameEl);
                 })
             })
         })
+}
+
+clearExistingGamesFromView = async function () {
+    currentGamesInView = {};
+    const containerDiv = document.getElementById('fetched-games-container');
+
+    while (containerDiv.firstChild) {
+        containerDiv.removeChild(containerDiv.firstChild);
+    }
 }
 
 createGameElement = async function (game) {
@@ -49,7 +55,12 @@ createGameElement = async function (game) {
 };
 
 createMechanicEls = function (mechanicsArr) {
-    return mechanicsArr.map(mechanic => {
+    return "<li>" + mechanicsArr.map(mechanic => {
         return mechanic.value;
-    }).join(' ');
+    }).join('</li><li>') + "</li>";
+}
+
+const selectNewMechanics = (gameName) => {
+    const mechanicNames = currentGamesInView[gameName].mechanics.map((mechanic) => mechanic.value)
+    updateMechanicsView(mechanicNames);
 }

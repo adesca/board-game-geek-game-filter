@@ -5,12 +5,23 @@
     <div class="uk-accordion-content">
         <ul class="uk-list uk-list-striped">
             <li>
-                Url: ${this.game.bggUrl}
+                Url: <a href="${this.game.bggUrl}">${this.game.bggUrl}</a>
             </li>
             <li>
-                Mechanics: ${createMechanicEls(this.game.mechanics)}
+                Mechanics:
+                <span class="uk-float-right">
+
+                    <button onclick="selectNewMechanics('${this.game.name}')">
+                        Search for similar games
+                    </button>
+                </span>
+                <ul class="inlined-mechanics-list uk-list-bullet">
+                    ${createMechanicEls(this.game.mechanics)}
+                </ul>
             </li>
-            Categories: ${this.game.categories}
+            <li>
+                Categories: ${this.game.categories}
+            </li>
 
         </ul>
     </div>

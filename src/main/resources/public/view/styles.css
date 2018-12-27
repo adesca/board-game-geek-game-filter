@@ -1,0 +1,10 @@
+ul.inlined-mechanics-list li {
+    display:inline;
+    list-style-type: circle;
+    list-style-position: inside;
+    padding-right: 5px;
+}
+
+#fetched-games-container {
+    width: 900px;
+}

@@ -5,6 +5,7 @@
     <title>Title</title>
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/css/uikit.min.css" />
+    <link rel="stylesheet" href="styles.css" />
 
     <!-- UIkit JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/js/uikit.min.js"></script>
@@ -18,11 +19,11 @@
     <div id="mechanics-container">
 
     </div>
+    <button onclick="queryGamesWithSelectedMechanics()">Update game view</button>
 
     <ul uk-accordion id="fetched-games-container" class="uk-list-divider">
 
     </ul>
 
-<button onclick="updateGameView()">Update game view</button>
 </body>
 </html>
