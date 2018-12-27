@@ -2,6 +2,7 @@ package app.repositories;
 
 import app.entities.FullGameProjection;
 import app.entities.Game;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -18,6 +19,11 @@ import java.util.stream.StreamSupport;
 public interface GameRepository extends CrudRepository<Game, Long> {
 
     Game findGameByNameLikeIgnoreCase(String name);
+
+    List<Game> findTop10ByOrderByRankAsc();
+
+    @RestResource(path = "findGamesByName")
+    List<Game> findAllByNameContainingIgnoreCase(@Param("name") String name);
 
     @RestResource(path = "findGamesWithMechanics")
     List<Game> findDistinctByMechanicsValueIn(@Param("mechanics") Iterable<String> mechanic);

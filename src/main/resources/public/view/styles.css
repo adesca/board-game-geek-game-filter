@@ -5,6 +5,15 @@ ul.inlined-mechanics-list li {
     padding-right: 5px;
 }
 
-#fetched-games-container {
-    width: 900px;
+.search-container{
+    width: 70%;
+    padding-left: 10px;
+}
+
+.search-buttons-container {
+    width: 100%;
+}
+
+input#name-search {
+    margin-left: 5%;
 }

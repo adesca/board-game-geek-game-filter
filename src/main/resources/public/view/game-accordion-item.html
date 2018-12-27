@@ -5,7 +5,8 @@
     <div class="uk-accordion-content">
         <ul class="uk-list uk-list-striped">
             <li>
-                Url: <a href="${this.game.bggUrl}">${this.game.bggUrl}</a>
+                Url: <a href="${this.game.bggUrl}" target="_blank">${this.game.bggUrl}</a>
+                <button class="uk-float-right" onclick="saveGameLocally('${this.game.name}')">Save game</button>
             </li>
             <li>
                 Mechanics:

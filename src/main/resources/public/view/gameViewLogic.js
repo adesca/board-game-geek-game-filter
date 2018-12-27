@@ -1,51 +1,44 @@
 let currentGamesInView = {};
 
-var updateGamesView = function (mechanicsArray) {
-    console.log('bleh');
+var updateGamesView = function (mechanicsArrayOrGameNameOrAll) {
 
-    var url;
-    var searchParams = new URLSearchParams();
-    if (mechanicsArray.length > 1) {
-        url = new URL('/games/search/findGamesWithMechanics', location.origin);
-        // /games/search/findGamesWithMechanics
+    let url;
+    if (typeof mechanicsArrayOrGameNameOrAll === 'string') {
+        if (mechanicsArrayOrGameNameOrAll === 'ALL') {
+            url = createFetchTopGamesUrl();
+        } else {
+            url = createGameSearchQueryUrl(mechanicsArrayOrGameNameOrAll);
+        }
 
-        mechanicsArray.forEach(function (mechanic) {
-            searchParams.append("mechanics", mechanic)
-        });
     } else {
-        url = new URL('/games', location.origin);
-        searchParams.append('mechanic.value', mechanicsArray[0])
+        url = createMechanicsQueryUrl(mechanicsArrayOrGameNameOrAll);
     }
 
-    url.search = searchParams.toString();
-
-    fetch(url.toString()).then(function (response) {
-        if (response.ok) {
-            return response.json();
-        } else {
-            console.log('there was an error');
-        }
-    })
-        .then(function (value) {
+    fetchForJson(url.toString())
+        .then(function (games) {
             clearExistingGamesFromView();
-            const containerDiv = document.getElementById('fetched-games-container');
 
-            value._embedded.games.forEach(function (game) {
+            games.forEach(function (game) {
                 currentGamesInView[game.name] = game;
                 createGameElement(game).then(newGameEl => {
-                    containerDiv.appendChild(newGameEl);
+                    addGameToView(newGameEl)
                 })
             })
         })
+
+
+}
+
+addGameToView = (newGame) => {
+    const containerDiv = document.getElementById('fetched-games-container');
+    containerDiv.appendChild(newGame);
 }
 
 clearExistingGamesFromView = async function () {
     currentGamesInView = {};
     const containerDiv = document.getElementById('fetched-games-container');
 
-    while (containerDiv.firstChild) {
-        containerDiv.removeChild(containerDiv.firstChild);
-    }
+    removeChildrenElements(containerDiv);
 }
 
 createGameElement = async function (game) {
@@ -63,4 +56,8 @@ createMechanicEls = function (mechanicsArr) {
 const selectNewMechanics = (gameName) => {
     const mechanicNames = currentGamesInView[gameName].mechanics.map((mechanic) => mechanic.value)
     updateMechanicsView(mechanicNames);
+}
+
+const getInfoForGameInView = (gameName) => {
+    return currentGamesInView[gameName];
 }

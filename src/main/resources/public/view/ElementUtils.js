@@ -31,3 +31,10 @@ const interpolateRemoteTemplate = (location, context) => {
     })
 
 }
+
+const removeChildrenElements = (parentEl) => {
+
+    while (parentEl.firstChild) {
+        parentEl.removeChild(parentEl.firstChild);
+    }
+}

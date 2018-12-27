@@ -11,19 +11,45 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/js/uikit-icons.min.js"></script>
 
+    <script src="fetchUtils.js"></script>
     <script  src="ElementUtils.js"></script>
     <script  src="mechanicsViewLogic.js"></script>
     <script  src="gameViewLogic.js"></script>
+    <script defer src="savedGamesViewLogic.js"></script>
+    <script src="UiToViewAdapter.js"></script>
 </head>
 <body>
-    <div id="mechanics-container">
+<div class="uk-flex">
+    <div class="search-container">
 
+        <div id="mechanics-container" uk-grid class="uk-child-width-1-4@m uk-grid-collapse">
+
+        </div>
+
+        <div class="search-buttons-container">
+            <button onclick="queryForTop10Games()">Get top 10 games</button>
+            <button onclick="queryGamesWithSelectedMechanics()">Search by mechanic</button>
+            <button onclick="clearMechanicsView()">Clear mechanics</button>
+
+            <input id="name-search" >
+            <button onclick="queryGamesForInputName()" > Search by game name</button>
+        </div>
+
+
+        <ul uk-accordion id="fetched-games-container" class="uk-list-divider">
+
+        </ul>
     </div>
-    <button onclick="queryGamesWithSelectedMechanics()">Update game view</button>
+    <div id="saved-games">
+        Games saved to local storage
+        <button onclick="clearGamesSavedLocally()">Clear games</button>
 
-    <ul uk-accordion id="fetched-games-container" class="uk-list-divider">
+        <ul uk-accordion class="uk-list-divider uk-display-block">
 
-    </ul>
+        </ul>
+    </div>
+
+</div>
 
 </body>
 </html>

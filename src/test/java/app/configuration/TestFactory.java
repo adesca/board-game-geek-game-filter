@@ -14,7 +14,7 @@ public class TestFactory {
                 "Co-operative Play", "Grid Movement", "Hand Management", "Modular Board",
                 "Role Playing", "Simultaneous Action Selection", "Storytelling", "Variable Player Powers")
                 .stream()
-                .map(mechanic -> new Mechanic(mechanic))
+                .map(Mechanic::new)
                 .collect(Collectors.toList());
 
         return Game.builder()
@@ -22,6 +22,7 @@ public class TestFactory {
                 .rank(1L)
                 .name("Gloomhaven")
                 .mechanics(expectedMechanics)
+                .categories("Adventure, Exploration, Fantasy, Fighting, Miniatures")
                 .build();
     }
 }
