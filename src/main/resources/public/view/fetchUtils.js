@@ -38,7 +38,11 @@ const fetchForJson = (path) => {
     })
         .then(responseJson => {
             if (responseJson._embedded) {
-                return Promise.resolve(responseJson._embedded)
+                if (responseJson._embedded.games) {
+                    return Promise.resolve(responseJson._embedded.games)
+                } else {
+                    return Promise.resolve(responseJson._embedded)
+                }
             } else {
                 return Promise.resolve(responseJson);
             }

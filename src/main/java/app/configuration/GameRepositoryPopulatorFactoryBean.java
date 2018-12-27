@@ -28,7 +28,7 @@ class GameResourceReader implements ResourceReader {
         InputStreamReader stream = new InputStreamReader(resource.getInputStream());
         CSVParser csvParser = new CSVParser(stream, CSVFormat.DEFAULT.withFirstRecordAsHeader());
 
-        return csvParser.getRecords().stream()
+        List<Game> savedGames =  csvParser.getRecords().stream()
                 .map(record ->
                 {
                     List<Mechanic> mechanics = asList(record.get(CSVColumn.mechanic).split(", "))
@@ -45,6 +45,9 @@ class GameResourceReader implements ResourceReader {
                             .build();
                 })
                 .collect(Collectors.toList());
+
+        System.out.println("Saved games count: " + savedGames.size());
+        return savedGames;
     }
 }
 

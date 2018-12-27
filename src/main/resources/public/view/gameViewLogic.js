@@ -48,9 +48,8 @@ createGameElement = async function (game) {
 };
 
 createMechanicEls = function (mechanicsArr) {
-    return "<li>" + mechanicsArr.map(mechanic => {
-        return mechanic.value;
-    }).join('</li><li>') + "</li>";
+    return mechanicsArr.map(mechanic => mechanic.value)
+        .join(', ');
 }
 
 const selectNewMechanics = (gameName) => {

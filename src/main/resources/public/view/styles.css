@@ -1,12 +1,11 @@
 ul.inlined-mechanics-list li {
     display:inline;
-    list-style-type: circle;
+    /*list-style-type: circle*/
     list-style-position: inside;
     padding-right: 5px;
 }
 
 .search-container{
-    width: 70%;
     padding-left: 10px;
 }
 
@@ -16,4 +15,22 @@ ul.inlined-mechanics-list li {
 
 input#name-search {
     margin-left: 5%;
+}
+
+#results-container ul {
+    width: 100%;
+}
+
+#results-container #saved-games {
+    height: 100%;
+    width: 50%;
+    border-left: black solid 5px;
+}
+
+#results-container #saved-games * {
+    padding-left: 5px;
+}
+
+#results-container {
+    height: 100%;
 }
