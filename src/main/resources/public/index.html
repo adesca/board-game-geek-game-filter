@@ -29,7 +29,7 @@
             <button onclick="queryGamesWithSelectedMechanics()">Search by mechanic</button>
             <button onclick="clearMechanicsView()">Clear mechanics</button>
 
-            <input id="name-search">
+            <input id="name-search" onkeyup="handleInputKeyPress(event)">
             <button onclick="queryGamesForInputName()"> Search by game name</button>
         </div>
 

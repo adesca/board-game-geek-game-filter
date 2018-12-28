@@ -15,8 +15,19 @@ const queryForTop10Games = () => {
     updateGamesView('ALL');
 }
 
+const handleInputKeyPress = (event) => {
+    if (event.code === 'Enter') {
+        queryGamesForInputName();
+    } else {
+        console.log(event);
+    }
+}
+
 const queryGamesForInputName = function () {
-    updateGamesView(document.querySelector('input#name-search').value);
+    const currentSearch = document.querySelector('input#name-search').value
+    if (currentSearch) {
+        updateGamesView(currentSearch);
+    }
 }
 
 const saveGameLocally = function (gameName) {
