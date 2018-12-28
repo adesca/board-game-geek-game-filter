@@ -24,7 +24,7 @@ input#name-search {
 #results-container #saved-games {
     height: 100%;
     width: 50%;
-    border-left: black solid 5px;
+    padding-left: 10px;
 }
 
 #results-container #saved-games * {
