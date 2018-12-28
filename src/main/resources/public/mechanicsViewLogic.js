@@ -22,7 +22,7 @@ fetchForJson('/api/mechanics/all')
         // containerDiv.appendChild()
     });
 
-updateMechanicsView = function (mechanicsArr) {
+updateSelectedMechanicsView = function (mechanicsArr) {
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
         checkbox.checked = false
     });

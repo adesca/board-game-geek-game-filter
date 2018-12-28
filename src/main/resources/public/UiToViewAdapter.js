@@ -41,5 +41,5 @@ const clearGamesSavedLocally = function () {
 }
 
 const clearMechanicsView = () => {
-    updateMechanicsView([])
+    updateSelectedMechanicsView([])
 }

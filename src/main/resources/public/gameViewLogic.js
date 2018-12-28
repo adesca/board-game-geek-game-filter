@@ -53,8 +53,9 @@ createMechanicEls = function (mechanicsArr) {
 }
 
 const selectNewMechanics = (gameName) => {
-    const mechanicNames = currentGamesInView[gameName].mechanics.map((mechanic) => mechanic.value)
-    updateMechanicsView(mechanicNames);
+    const mechanicNames = currentGamesInView[gameName].mechanics.map((mechanic) => mechanic.value);
+    updateSelectedMechanicsView(mechanicNames);
+    queryGamesWithSelectedMechanics();
 }
 
 const getInfoForGameInView = (gameName) => {
