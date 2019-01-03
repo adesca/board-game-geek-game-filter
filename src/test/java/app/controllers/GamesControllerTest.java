@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -59,9 +60,11 @@ public class GamesControllerTest {
     }
 
     @Test
+    @Transactional
     public void fetchGamesByMechanics_returnsOnlyGamesWithAllMechanics() throws Exception {
         Game gameWithWantedMechanicsAndMore = Game.builder()
                 .name("game1")
+                .rank(1L)
                 .mechanics(
                         asList(new Mechanic("mechanic1"), new Mechanic("mechanic2"),
                                 new Mechanic("mechanic3"))
@@ -70,6 +73,7 @@ public class GamesControllerTest {
 
         Game gameWithOnlyASubsetOfWantedMechanics = Game.builder()
                 .name("game2")
+                .rank(2L)
                 .mechanics(
                         asList(new Mechanic("mechanic1"), new Mechanic("mechanic3"))
                 )
@@ -77,6 +81,7 @@ public class GamesControllerTest {
 
         Game gameWithOnlyWantedMechanics = Game.builder()
                 .name("game3")
+                .rank(3L)
                 .mechanics(
                         asList(new Mechanic("mechanic1"), new Mechanic("mechanic2"))
                 )
@@ -96,6 +101,38 @@ public class GamesControllerTest {
         assertEquals(actualGames.size(), 2);
         assertThatThereIsOnlyOneGameWithName(actualGames, "game1");
         assertThatThereIsOnlyOneGameWithName(actualGames, "game3");
+
+    }
+
+    @Test
+    @Transactional
+    public void fetchGamesByMechanics_sortsGamesByRankAsc() throws Exception {
+        Game gameWithWantedMechanicsAndMore = Game.builder()
+                .name("game1")
+                .rank(2L)
+                .mechanics(
+                        asList(new Mechanic("mechanic1"), new Mechanic("mechanic2"),
+                                new Mechanic("mechanic3"))
+                )
+                .build();
+
+        Game gameWithOnlyWantedMechanics = Game.builder()
+                .rank(1L)
+                .name("game3")
+                .mechanics(
+                        asList(new Mechanic("mechanic1"), new Mechanic("mechanic2"))
+                )
+                .build();
+
+        gameRepository.save(asList( gameWithOnlyWantedMechanics, gameWithWantedMechanicsAndMore));
+
+
+        MvcResult result = mockMvc.perform(get("/api/games")
+                .param("mechanics", "mechanic1", "mechanic2"))
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$[0].name").value("game3"))
+                .andExpect(jsonPath("$[1].name").value("game1"))
+                .andReturn();
 
     }
 

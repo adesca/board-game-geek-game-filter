@@ -42,6 +42,7 @@ public class GamesController {
 
                    return mechanicValues.containsAll(mechanics);
                 })
+                .sorted(Comparator.comparingLong(Game::getRank))
                 .collect(Collectors.toList());
     }
 
