@@ -1,0 +1,1 @@
+curl https://fierce-escarpment-24684.herokuapp.com/
